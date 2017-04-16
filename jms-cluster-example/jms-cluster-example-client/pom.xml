@@ -62,12 +62,31 @@
 						</classpath>
 						<argument>de.akquinet.jbosscc.client.Producer</argument>
 
-						<argument>127.0.0.1</argument>
-						<argument>4447</argument>
-						<argument>admin</argument>
-						<argument>123123</argument>
+						<argument>172.16.2.5</argument>
+						<argument>4847</argument>
+						<argument>testuser</argument>
+						<argument>testuser123!</argument>
 					</arguments>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<configuration>
+					<transformers>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>de.akquinet.jbosscc.client.Producer</mainClass>
+						</transformer>
+					</transformers>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 

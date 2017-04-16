@@ -8,8 +8,8 @@ import javax.naming.NamingException;
 
 public class JndiLookup {
 
-	private static final String STD_IP = "127.0.0.1";
-	private static final String STD_PORT = "4447";
+	private static final String STD_IP = "172.16.2.5";
+	private static final String STD_PORT = "4847";
 
 	private final Context context;
 

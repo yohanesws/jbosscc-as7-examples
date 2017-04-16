@@ -48,6 +48,8 @@ public class Producer {
 		this.user = user;
 		this.pass = pass;
 		JndiLookup jndiLookup = new JndiLookup(ip, port, user, pass);
+
+		System.out.println("jndiLookup " + ip + " "+ port + " "+ user);
 		connectionFactory = jndiLookup.lookup(ConnectionFactory.class,
 				"jms/RemoteConnectionFactory");
 		queue = jndiLookup.lookup(Queue.class, "jms/queue/test");
@@ -63,24 +65,24 @@ public class Producer {
 			} else {
 				connection = connectionFactory.createConnection();
 			}
-			
+
 			connection.setExceptionListener(new ExceptionListener() {
-				
+
 				@Override
 				public void onException(JMSException exception) {
 					exception.printStackTrace();
-					
+
 				}
 			});
-		
-			
+
+
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			messageProducer = session.createProducer(queue);
 			connection.start();
 			TextMessage message = session.createTextMessage();
 
 			int i = 0;
-			while (i < 100) {
+			while (i < 300) {
 				message.setText(text + i++);
 				messageProducer.send(message);
 				Thread.sleep(250);
